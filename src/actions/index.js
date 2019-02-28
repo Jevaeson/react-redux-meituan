@@ -2,49 +2,61 @@ import axios from 'axios'
 
 export const getGoods = () => {
   return dispatch => {
-    axios.get('http://localhost:3008/goods').then(res => {
-      dispatch({
-        type: 'GET_GOODS',
-        goods: res.data
+    axios
+      .get(
+        'https://raw.githubusercontent.com/Jevaeson/react-redux-meituan/master/api/db.json'
+      )
+      .then(res => {
+        dispatch({
+          type: 'GET_GOODS',
+          goods: res.data.goods
+        })
       })
-    })
   }
 }
 export const getRatings = () => {
   return dispatch => {
-    axios.get('http://localhost:3008/ratings').then(res => {
-      dispatch({
-        type: 'GET_RATINGS',
-        ratings: res.data
+    axios
+      .get(
+        'https://raw.githubusercontent.com/Jevaeson/react-redux-meituan/master/api/db.json'
+      )
+      .then(res => {
+        dispatch({
+          type: 'GET_RATINGS',
+          ratings: res.data.ratings
+        })
       })
-    })
   }
 }
-export const addToCart = (id, eid, newFoods) => {
-  return dispatch => {
-    axios.patch(`http://localhost:3008/goods/${id}`, newFoods).then(() => {
-      dispatch({
-        type: 'ADD_TO_CART',
-        id: eid
-      })
-    })
-  }
-}
+// export const addToCart = (id, eid, newFoods) => {
+//   return dispatch => {
+//     axios.patch(`http://localhost:3008/goods/${id}`, newFoods).then(() => {
+//       dispatch({
+//         type: 'ADD_TO_CART',
+//         id: eid
+//       })
+//     })
+//   }
+// }
 
-// export const addToCart = id => ({
-//   type: 'ADD_TO_CART',
-//   id
-// })
-export const minToCart = (id, eid, newFoods) => {
-  return dispatch => {
-    axios.patch(`http://localhost:3008/goods/${id}`, newFoods).then(() => {
-      dispatch({
-        type: 'MIN_TO_CART',
-        id: eid
-      })
-    })
-  }
-}
+export const addToCart = (id, eid, newFoods) => ({
+  type: 'ADD_TO_CART',
+  id: eid
+})
+// export const minToCart = (id, eid, newFoods) => {
+//   return dispatch => {
+//     axios.patch(`http://localhost:3008/goods/${id}`, newFoods).then(() => {
+//       dispatch({
+//         type: 'MIN_TO_CART',
+//         id: eid
+//       })
+//     })
+//   }
+// }
+export const minToCart = (id, eid, newFoods) => ({
+  type: 'MIN_TO_CART',
+  id: eid
+})
 
 // export const addComment = (newComment, clearIuput) => {
 //   return dispatch => {
